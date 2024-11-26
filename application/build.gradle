@@ -1,0 +1,23 @@
+plugins {
+    id 'heliosx.java-application-conventions'
+    id 'com.palantir.docker'
+}
+
+dependencies {
+    implementation project(':consultation')
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+dockerPrepare {
+    dependsOn build
+}
+
+docker {
+    name = "application:local"
+    copySpec.from('build/libs/application.jar')
+}

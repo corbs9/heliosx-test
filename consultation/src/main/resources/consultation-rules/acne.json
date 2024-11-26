@@ -1,0 +1,64 @@
+{
+  "questionGroups": [
+    {
+      "id": 1,
+      "questions": [
+        {
+          "id": 1,
+          "rule": {
+            "type": "YESNORULE",
+            "expectedResponse": "YES",
+            "errorLevel": "ERROR",
+            "errorMessage": "These products are not suitable for you, if you have severe acne. You would be better consulting your GP."
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "questions": [
+        {
+          "id": 2,
+          "rule": {
+            "type": "YESNORULE",
+            "expectedResponse": "NO",
+            "errorLevel": "WARNING",
+            "errorMessage": "Some acne treatments can cause birth defects. You must use effective contraception whilst using acne treatments. Acne treatments should be discontinued at least one cycle prior to pregnancy. If you forget your contraception you should stop using your treatment and if you fall pregnant whilst using an acne treatment, stop it immediately and inform your GP."
+          }
+        },
+        {
+          "id": 3,
+          "rule": {
+            "type": "YESNORULE",
+            "expectedResponse": "NO",
+            "errorLevel": "ERROR",
+            "errorMessage": "If you have an allergy to any of these ingredients, we recommend you obtain treatment through our sister company Dermatica. They will be able to advise on a suitable treatment for you"
+          }
+        },
+        {
+          "id": 4,
+          "rule": {
+            "type": "YESNORULE",
+            "expectedResponse": "NO",
+            "errorLevel": "WARNING",
+            "errorMessage": "Many acne products are not suitable for use in pregnancy as there is a risk of birth defects. We can only offer you azelaic acid."
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "questions": [
+        {
+          "id": 5,
+          "rule": {
+            "type": "YESNORULE",
+            "expectedResponse": "YES",
+            "errorLevel": "ERROR",
+            "errorMessage": "You must agree to this before continuing. If you need assistance contact customer support."
+          }
+        }
+      ]
+    }
+  ]
+}

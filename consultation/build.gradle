@@ -1,0 +1,27 @@
+plugins {
+    id 'heliosx.java-application-conventions'
+}
+
+group = 'org.heliosx'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'commons-io:commons-io:2.18.0'
+    testImplementation 'org.skyscreamer:jsonassert:2.0-rc1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}

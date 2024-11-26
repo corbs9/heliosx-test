@@ -1,0 +1,8 @@
+name: heliosx
+
+services:
+  application:
+    image: application:local
+    container_name: application
+    ports:
+      - '8080:8080'

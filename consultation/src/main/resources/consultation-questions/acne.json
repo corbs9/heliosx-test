@@ -1,0 +1,47 @@
+{
+  "questionGroups": [
+    {
+      "id": 1,
+      "name": "About You",
+      "questions": [
+        {
+          "id": 1,
+          "name": "Do you have mild or moderate acne?",
+          "questionType": "YESORNO"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Health",
+      "questions": [
+        {
+          "id": 2,
+          "name": "Are you female and between 18 and 55?",
+          "questionType": "YESORNO"
+        },
+        {
+          "id": 3,
+          "name": "Are you allergic to any of the following: Adapalene, Azelaic Acid, Benzoyl Peroxide, Clindamycin",
+          "questionType": "YESORNO"
+        },
+        {
+          "id": 4,
+          "name": "Are you pregnant, planning on becoming pregnant, or breastfeeding?",
+          "questionType": "YESORNO"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Agreement",
+      "questions": [
+        {
+          "id": 5,
+          "name": "Do you understand that it can take 4-8 weeks of treatment before beneficial effects are seen?",
+          "questionType": "YESORNO"
+        }
+      ]
+    }
+  ]
+}
