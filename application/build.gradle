@@ -7,12 +7,6 @@ dependencies {
     implementation project(':consultation')
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
 dockerPrepare {
     dependsOn build
 }

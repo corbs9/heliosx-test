@@ -11,7 +11,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -26,6 +27,7 @@ import org.mockito.ArgumentCaptor;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.http.MediaType;
+import org.springframework.test.json.JsonCompareMode;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -143,21 +145,17 @@ class ConsultationControllerITest {
             var questionResponses = List.of(givenAnAnalyseQuestionResponse());
             var questionGroupResponses =
                     List.of(givenAnAnalyseQuestionGroupWithAnalyseQuestionsResponses(questionResponses));
+            var consultationStatus = getRandomEnum(ErrorLevel.class);
             given(assessConsultation.perform(anyString(), any()))
-                    .willReturn(new AnalysedConsultation(getRandomEnum(ErrorLevel.class), questionGroupResponses));
+                    .willReturn(new AnalysedConsultation(consultationStatus, questionGroupResponses));
 
-            var response = mockMvc.perform(post(consultationUri)
+            var expectedResponse = JsonMapper.fromObject(
+                    createExpectedResponseFromQuestionGroupResponses(consultationStatus, questionGroupResponses));
+
+            mockMvc.perform(post(consultationUri)
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(givenAnAnalyseConsultationRequest()))
-                    .andReturn()
-                    .getResponse();
-
-            var expectedResponse = createExpectedResponseFromQuestionGroupResponses(questionGroupResponses);
-
-            JSONAssert.assertEquals(
-                    JsonMapper.fromObject(expectedResponse),
-                    response.getContentAsString(),
-                    JSONCompareMode.NON_EXTENSIBLE);
+                    .andExpect(content().json(expectedResponse, JsonCompareMode.LENIENT));
         }
 
         private void givenAnAnalysedConsultation() {
@@ -169,8 +167,10 @@ class ConsultationControllerITest {
         }
 
         private Map<String, Object> createExpectedResponseFromQuestionGroupResponses(
-                Collection<AnalysedQuestionGroup> questionGroupResponses) {
+                ErrorLevel errorLevel, Collection<AnalysedQuestionGroup> questionGroupResponses) {
             return Map.of(
+                    "status",
+                    errorLevel,
                     "questionGroups",
                     questionGroupResponses.stream()
                             .map(group -> Map.of(

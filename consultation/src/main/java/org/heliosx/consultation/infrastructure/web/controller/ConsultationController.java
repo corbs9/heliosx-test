@@ -5,7 +5,7 @@ import org.heliosx.consultation.GetConsultation;
 import org.heliosx.consultation.domain.model.AnalyseConsultationRequest;
 import org.heliosx.consultation.domain.model.AnalysedConsultation;
 import org.heliosx.consultation.infrastructure.web.controller.mapper.AnalyseConsultationDTOMapper;
-import org.heliosx.consultation.infrastructure.web.controller.mapper.AnalyseConsultationResponseMapper;
+import org.heliosx.consultation.infrastructure.web.controller.mapper.AnalysedConsultationDTOMapper;
 import org.heliosx.consultation.infrastructure.web.controller.mapper.ConsultationResponseMapper;
 import org.heliosx.consultation.infrastructure.web.dto.AnalyseConsultationDTO;
 import org.heliosx.consultation.infrastructure.web.dto.AnalysedConsultationDTO;
@@ -34,7 +34,7 @@ public class ConsultationController {
     AnalysedConsultationDTO analyseConsultation(
             @PathVariable String consultationName, @RequestBody AnalyseConsultationDTO dto) {
         AnalyseConsultationRequest analysisRequest = AnalyseConsultationDTOMapper.toDomain(dto);
-        AnalysedConsultation analysisResponse = assessConsultation.perform(consultationName, analysisRequest);
-        return AnalyseConsultationResponseMapper.fromDomain(analysisResponse);
+        AnalysedConsultation analysedConsultation = assessConsultation.perform(consultationName, analysisRequest);
+        return AnalysedConsultationDTOMapper.fromDomain(analysedConsultation);
     }
 }
